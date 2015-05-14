@@ -7,6 +7,6 @@ else:
 print "Hi",call+name+",Let's say","hello","world!","\t",r"\\"+"I don't you gender"+"\\\\"
 ''''How to call user
     print hello world'''''
-print decode("utf8")'''Copyright © Jim
+print '''Copyright © Jim
 Powered by python
 Thanks for Github'''
