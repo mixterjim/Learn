@@ -8,7 +8,6 @@ name[1]=input("What's your name?\n")
 number = (1,name)
 for n in name:
     print n
-range(5)
 x = 100
 sum = 0
 while x > 0:
