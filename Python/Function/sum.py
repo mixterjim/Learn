@@ -6,5 +6,5 @@ def fake_sum(x):
     s = 0
     for i in x:
         s = s + i
-    print s
-fake_sum(l)
+    return s
+print fake_sum(l)
