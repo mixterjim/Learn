@@ -23,11 +23,14 @@ print max_length
 
 f.close()
 
-# maxlength=8
 f = open("names.txt")
 for line in f:
     name = line.strip()
     if is_pamax(name):
-        if 8== len(name):
+        if max_length== len(name):
             print name
 f.close()
+
+#Crack a names.txt
+#123321
+#TRALLART
