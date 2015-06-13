@@ -23,3 +23,6 @@ class Dog(Mammal, Runnable):
     pass
 class Bat(Mammal, Flyable):
     pass
+#MixIn
+class Dog(Mammal, Runnable, Flyable):
+    pass
