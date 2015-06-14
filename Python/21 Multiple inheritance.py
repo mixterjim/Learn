@@ -11,11 +11,11 @@ class Parrot(Bird):
 class Ostrich(Bird):
     pass
 
-class Runnable(object):
+class Runnable(Animal):
     def run(self):
         return('Running...')
 
-class Flyable(object):
+class Flyable(Bird):
     def fly(self):
         print('Flying...')
 
@@ -26,3 +26,4 @@ class Bat(Mammal, Flyable):
 #MixIn
 class Dog(Mammal, Runnable, Flyable):
     pass
+print Runnable().run()
