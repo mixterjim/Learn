@@ -8,7 +8,7 @@ class Bird(Animal):
 
 class Parrot(Bird):
     pass
-class Ostrich(Bird):
+class Dog(Bird):
     pass
 
 class Runnable(Animal):
