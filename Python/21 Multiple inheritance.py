@@ -6,24 +6,30 @@ class Mammal(Animal):
 class Bird(Animal):
     pass
 
-class Parrot(Bird):
-    pass
-class Dog(Bird):
-    pass
-
-class Runnable(Animal):
+class Runnable(Mammal):
     def run(self):
-        return('Running...')
-
+        print 'Running...'
 class Flyable(Bird):
     def fly(self):
-        print('Flying...')
-
-class Dog(Mammal, Runnable):
+        print'Flying...'
+        
+class Dog(Runnable):
     pass
-class Bat(Mammal, Flyable):
+class Parrot(Flyable):
+    pass
+Dog().run()
+Parrot().fly()
+
+class Pet(object):
+    pass
+class Cat(Pet, Runnable):
+    pass
+class Bat(Pet, Flyable):
     pass
 #MixIn
-class Dog(Mammal, Runnable, Flyable):
+class Chicken(Pet, Runnable, Flyable):
     pass
-print Runnable().run()
+Cat().run()
+Bat().fly()
+Chicken().run()
+Chicken().fly()
