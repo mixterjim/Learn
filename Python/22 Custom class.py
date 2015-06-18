@@ -13,7 +13,7 @@ class Fib(object):
         self.a, self.b = 0, 1   #a=0 b=1
     def __iter__(self):
         return self     #return self and send to "__next__()"
-    def __next__(self):
+    def next(self):     #"def __next__(self):" in Python 3.x
         self.a, self.b = self.b, self.a + self.b
         if self.a > 1000:
             raise StopIteration();  #exit loop
