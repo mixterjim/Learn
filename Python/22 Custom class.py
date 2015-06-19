@@ -20,3 +20,25 @@ class Fib(object):
         return self.a
 for n in Fib():
      print n
+
+class Fib_s(object):
+    def __getitem__(self, n):
+        if isinstance(n, int): #index 'n'
+            a, b = 1, 1
+            for x in range(n):
+                a, b = b, a + b
+            return a
+        if isinstance(n, slice): #n is slice
+            start = n.start
+            stop = n.stop
+            if start is None:
+                start = 0
+            a, b = 1, 1
+            L = []
+            for x in range(stop):
+                if x >= start:
+                    L.append(a)
+                a,b = b, a+b
+            return L
+f = Fib_s()
+print f[0:5]
