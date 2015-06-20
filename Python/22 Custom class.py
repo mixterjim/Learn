@@ -40,5 +40,4 @@ class Fib_s(object):
                     L.append(a)
                 a,b = b, a+b
             return L
-f = Fib_s()
-print f[0:5]
+print Fib_s()[0:5]
