@@ -8,7 +8,7 @@ print 'Name:',Student().name
 print 'Score:',Student().score
 
 class Chain(object):
-    def __init__(self, path=''):
+    def __init__(self, path):
         self._path = path
     def __getattr__(self, path):
         return Chain('%s/%s' % (self._path, path))
