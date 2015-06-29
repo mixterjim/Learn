@@ -7,3 +7,5 @@ class MyList(list):
 L = MyList()
 L.add(1)
 print L
+i = list()
+i.add(1)
