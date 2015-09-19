@@ -10,11 +10,10 @@ main(){
 	printf("\n");
 	if (kills > STANDARD)
 		pay = STANDARD * RATE +(kills - STANDARD) * (RATE * 1.5);
+	else if	(kills == 0)
+		printf("What are you doing?\n");
 	else
-		if (kills == 0)
-			printf("What are you doing?\n");
-		else
-			pay = kills * RATE;
+		pay = kills * RATE;
 	printf("You get %f $\n", pay);
 	return 0;
 }
