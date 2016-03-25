@@ -3,8 +3,9 @@
 int isPrime(int x, int KnowPrimes[], int numberOfKnowPrimes);
 
 int main(void) {
-	const int number = 10;
-	int prime[10] = {2,};
+//	const int number = 10;
+	#define number 10
+	int prime[number] = {2,};
 	int count = 1;
 	int i = 3;
 	{
