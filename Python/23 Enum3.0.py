@@ -11,6 +11,6 @@ OCT = 10
 NOV = 11
 DEC = 12
 from enum import Enum
-Month = Enum('Month', ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'))
+Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
 for name, member in Month.__members__.items():
-    print (name,'=>',member,',',member.value)
+    print(name, '=>', member, ',', member.value)

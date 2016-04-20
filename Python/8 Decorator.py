@@ -1,14 +1,18 @@
 def test():
-    print 'Test'
+    print('Test')
 t = test
-print t.__name__
-print '-----------------'
+print(t.__name__)
+print('-----------------')
+
+
 def log(function):
     def decorator(*args, **kw):
-        print 'Name is %s():' %function.__name__
+        print('Name is %s():' % function.__name__)
         return function(*args, **kw)
     return decorator
+
+
 @log
 def test():
-    print 'Test'
+    print('Test')
 test()

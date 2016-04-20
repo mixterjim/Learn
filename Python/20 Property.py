@@ -1,6 +1,8 @@
 class Student(object):
+
     def get_score(self):
         return self.score
+
     def set_score(self, value):
         if not isinstance(value, int):
             raise ValueError('Please enter an integer!')
@@ -9,13 +11,17 @@ class Student(object):
         self.score = value
 s = Student()
 s.set_score(100)
-#s.set_score(-1)
-print s.get_score()
+# s.set_score(-1)
+print(s.get_score())
 #-----------------------------#
+
+
 class Student(object):
+
     @property
     def score(self):
         return self._score
+
     @score.setter
     def score(self, value):
         if not isinstance(value, int):
@@ -26,4 +32,4 @@ class Student(object):
 s = Student()
 s.score = 99
 #s.score = 101
-print  s.score
+print(s.score)

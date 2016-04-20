@@ -1,14 +1,20 @@
 import logging
-#Error
+# Error
+
+
 def foo(s):
-    return 10/ int(s)
+    return 10 / int(s)
+
+
 def bar(s):
     return foo(s)*2
+
+
 def main():
     try:
         bar('0')
-    except StandardError, e:
+    except Exception as e:
         logging.exception(e)
 main()
-#print all error
-print 'END'
+# print all error
+print('END')
