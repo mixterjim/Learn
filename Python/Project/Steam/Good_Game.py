@@ -21,5 +21,6 @@ while i < len(frame):
     frame.good[i] = int(good[0].replace(',', ''))
     bad = findall(r'(?<=Negative </span> <span class="user_reviews_count">\().*?(?=\))', data2)
     frame.bad[i] = int(bad[0].replace(',', ''))
-    print(frame.sort('good'))
+    frame.to_csv('Steam.csv', encoding='utf-8', index=False)
+    print(i, 'Done')
     i += 1
