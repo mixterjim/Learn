@@ -1,4 +1,5 @@
 import urllib.request
+import time
 room = input('Room ID:')
 if len(room) == 0:
     room = 43508
@@ -12,26 +13,37 @@ if len(data) == 0:
 num = 0
 k = 0
 i = input('Cycles(-1 to Endless loop):')
-if i == '':
+if len(i) == 0:
     i = -1
 i = int(i)
+start_min = input('Start minute:')
+if len(start_min) == 0:
+    start_min = 0
+start_min = int(start_min)
 request = urllib.request.Request("http://live.bilibili.com/msg/send")
 # file = open(r'Cookie.txt')
 # cookie = file.read()
 cookie = 'DedeUserID=???; DedeUserID__ckMd5=???; SESSDATA=???;'
 request.add_header('Cookie', cookie)
-print('Start')
 while i != 0:
-    if k >= len(data):
-        k = 0
-    dm = str(data[k]+str(num))
-    post = 'color=16777215&fontsize=25&mode=1&msg=%s&rnd=1463234970&roomid=%s' % (
-        dm, room)
-    post = post.encode('utf-8')
-    urllib.request.urlopen(request, post)
-    if len(dm) >= 20:
-        num = 0
-    num += 1
+    min = time.localtime()[4]
+    if min >= start_min:
+        print(time.localtime()[3], ':', time.localtime()[4], 'Start')
+    while min >= start_min:
+        if k >= len(data):
+            k = 0
+            min = time.localtime()[4]
+            print(dm)
+        dm = str(data[k] + str(num))
+        post = 'color=16777215&fontsize=25&mode=1&msg=%s&rnd=1463234970&roomid=%s' % (
+            dm, room)
+        post = post.encode('utf-8')
+        # urllib.request.urlopen(request, post)
+        if len(dm) >= 20:
+            num = 0
+        num += 1
+        k += 1
+    print(time.localtime()[3], ':', time.localtime()[4], 'End')
     i -= 1
-    k += 1
-print('End')
+    time.sleep(60)
+print('Exit!!!')
