@@ -28,8 +28,7 @@ while i != 0:
     post = 'color=16777215&fontsize=25&mode=1&msg=%s&rnd=1463234970&roomid=%s' % (
         dm, room)
     post = post.encode('utf-8')
-    print(dm)
-    # urllib.request.urlopen(request, post)
+    urllib.request.urlopen(request, post)
     if len(dm) >= 20:
         num = 0
     num += 1
