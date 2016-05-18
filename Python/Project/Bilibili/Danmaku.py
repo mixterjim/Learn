@@ -1,5 +1,6 @@
 import urllib.request
 import time
+import random
 room = input('Room ID:')
 if len(room) == 0:
     room = 43508
@@ -33,16 +34,18 @@ while i != 0:
         if k >= len(data):
             k = 0
             min = time.localtime()[4]
-            print(dm)
-        dm = str(data[k] + str(num))
+        # dm = str(data[k] + str(num))
+        dm = data[k]
         post = 'color=16777215&fontsize=25&mode=1&msg=%s&rnd=1463234970&roomid=%s' % (
             dm, room)
         post = post.encode('utf-8')
         # urllib.request.urlopen(request, post)
+        print(dm)
         if len(dm) >= 20:
             num = 0
         num += 1
         k += 1
+        time.sleep(random.uniform(0.5, 1.5))
     print(time.localtime()[3], ':', time.localtime()[4], 'End')
     i -= 1
     time.sleep(60)
