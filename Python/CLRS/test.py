@@ -61,7 +61,7 @@ def MERGE_SORT(list, p, r):
         MERGE_SORT(list, q, r)
         MERGE(list, p, q, r)
 
-A = random_int_list(1, 10000, 10)
+A = random_int_list(1, 100000, 1000)
 
 B = A
 start = time.clock()

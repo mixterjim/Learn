@@ -1,4 +1,4 @@
-def INSERTION_FIND(list, value):
+def INSERTION_SEARCH(list, value):
     i = 0
     while i < len(list) and list[i] != value:
         i += 1
@@ -17,4 +17,4 @@ def CREATE_LIST(list):
 A = []
 CREATE_LIST(A)
 v = input("Find:")
-INSERTION_FIND(A, v)
+INSERTION_SEARCH(A, v)

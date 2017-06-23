@@ -5,6 +5,7 @@ def INSERTION_SORT(list):
                 tmp = list[i]
                 list[i] = list[i + 1]
                 list[i + 1] = tmp
+    k = 0
     for i in range(0, len(list) - 2):
         if list[-1] > list[i]:
             k = i + 1
