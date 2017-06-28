@@ -6,11 +6,10 @@ def MERGE(list, p, q, r):
         if L[i] <= R[j]:
             list[p] = L[i]
             i += 1
-            p += 1
         else:
             list[p] = R[j]
             j += 1
-            p += 1
+        p += 1
     if i > j:
         for j in range(j, len(R)):
             list[p] = R[j]

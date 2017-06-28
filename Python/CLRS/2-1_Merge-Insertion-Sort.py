@@ -12,27 +12,17 @@ def random_int_list(start, stop, length):
     return random_list
 
 
-def INSERTION_SORT(list):
-    for n in range(1, len(list)):
+def INSERTION_SORT(list, p, r):
+    for n in range(p + 1, r):
         tmp = list[n]
         i = n - 1
-        while i >= 0 and list[i] > tmp:
+        while i >= p and list[i] > tmp:
             list[i + 1] = list[i]
             i = i - 1
         list[i + 1] = tmp
 
 
-def SELECTION_SORT(list):
-    for n in range(0, len(list) - 1):
-        tmp = list[n]
-        for i in range(n, len(list) - 1):
-            if tmp > list[i + 1]:
-                tmp = list[i + 1]
-                key = i + 1
-                list[n], list[key] = list[key], list[n]
-
-
-def MERGE(list, p, q, r):
+def MERGE(list, p, q, r, k):
     L = list[p:q]
     R = list[q:r]
     i = j = 0
@@ -40,11 +30,10 @@ def MERGE(list, p, q, r):
         if L[i] <= R[j]:
             list[p] = L[i]
             i += 1
-            p += 1
         else:
             list[p] = R[j]
             j += 1
-            p += 1
+        p += 1
     if i > j:
         for j in range(j, len(R)):
             list[p] = R[j]
@@ -55,29 +44,25 @@ def MERGE(list, p, q, r):
             p += 1
 
 
-def MERGE_SORT(list, p, r):
-    if p < r - 1:
+def MERGE_SORT(list, p, r, k):
+    if len(list[p:r]) < k:
+        INSERTION_SORT(list, p, r)
+    elif p < r - 1:
         q = int((r - p) / 2 + p)
-        MERGE_SORT(list, p, q)
-        MERGE_SORT(list, q, r)
-        MERGE(list, p, q, r)
+        MERGE_SORT(list, p, q, k)
+        MERGE_SORT(list, q, r, k)
+        MERGE(list, p, q, r, k)
 
-A = random_int_list(1, 100000, 1000)
 
-B = A
+A = random_int_list(1, 10000, 1000)
+
 start = time.clock()
-INSERTION_SORT(B)
+MERGE_SORT(A, 0, len(A), 20)
 end = time.clock()
-print("INSERTION_SORT: %f s" % (end - start))
+print("K=20 : %f s" % (end - start))
 
-B = A
+B = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 start = time.clock()
-SELECTION_SORT(B)
+MERGE_SORT(A, 0, len(A), 0)
 end = time.clock()
-print("SELECTION_SORT: %f s" % (end - start))
-
-B = A
-start = time.clock()
-MERGE_SORT(B, 0, len(B))
-end = time.clock()
-print("MERGE_SORT: %f s" % (end - start))
+print("K= 0 : %f s" % (end - start))
