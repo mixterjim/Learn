@@ -23,7 +23,7 @@ def INSERTION_SORT(list):
 
 
 def SELECTION_SORT(list):
-    for n in range(0, len(list) - 1):
+    for n in range(0, len(list)):
         tmp = list[n]
         for i in range(n, len(list) - 1):
             if tmp > list[i + 1]:
@@ -62,6 +62,14 @@ def MERGE_SORT(list, p, r):
         MERGE_SORT(list, q, r)
         MERGE(list, p, q, r)
 
+
+def BUBBLE_SORT(list):
+    for i in range(0, len(list)):
+        for j in range(len(list) - 1, i, -1):
+            if list[j] < list[j - 1]:
+                tmp = list[j]
+                list[j], list[j - 1] = list[j - 1], tmp
+
 A = random_int_list(1, 100000, 1000)
 
 B = A
@@ -81,3 +89,9 @@ start = time.clock()
 MERGE_SORT(B, 0, len(B))
 end = time.clock()
 print("MERGE_SORT: %f s" % (end - start))
+
+B = A
+start = time.clock()
+BUBBLE_SORT(B)
+end = time.clock()
+print("BUBBLE_SORT: %f s" % (end - start))

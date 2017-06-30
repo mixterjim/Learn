@@ -3,9 +3,9 @@ def INSERTION_SEARCH(list, value):
     while i < len(list) and list[i] != value:
         i += 1
     if i > len(list) - 1:
-        print("NIL")
+        return "NIL"
     else:
-        print(i)
+        return i
 
 
 def CREATE_LIST(list):
@@ -17,4 +17,4 @@ def CREATE_LIST(list):
 A = []
 CREATE_LIST(A)
 v = input("Find:")
-INSERTION_SEARCH(A, v)
+print(INSERTION_SEARCH(A, v))

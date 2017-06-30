@@ -18,7 +18,7 @@ def CREATE_LIST(list):
 
 
 def SELECTION_SORT(list):
-    for n in range(0, len(list) - 1):
+    for n in range(0, len(list)):
         tmp = list[n]
         for i in range(n, len(list) - 1):
             if tmp > list[i + 1]:
@@ -33,10 +33,10 @@ def BINARY_SEARCH(list, value):
     r = int((p - q) / 2)
     while True:
         if len(list[q:p]) == 1 and list[q + r] != value:
-            print("NIL")
+            return "NIL"
             break
         if list[q + r] == value:
-            print(q + r)
+            return q + r
             break
         if list[q + r] > value:
             p = p - r
@@ -52,4 +52,4 @@ print(A)
 v = int(input("Find:"))
 # for n in range(0, len(A)):
 #     v = A[n]
-BINARY_SEARCH(A, v)
+print(BINARY_SEARCH(A, v))

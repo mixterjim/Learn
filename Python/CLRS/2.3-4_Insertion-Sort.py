@@ -14,6 +14,6 @@ def INSERTION_SORT(list):
     tmp = list[k:-1]
     list[k] = list[-1]
     list[k + 1:] = tmp
-    print(list)
+    return list
 A = [5, 2, 4, 6, 1, 3]
-INSERTION_SORT(A)
+print(INSERTION_SORT(A))

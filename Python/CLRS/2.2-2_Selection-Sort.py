@@ -1,5 +1,5 @@
 def SELECTION_SORT(list):
-    for n in range(0, len(list) - 1):
+    for n in range(0, len(list)):
         tmp = list[n]
         for i in range(n, len(list) - 1):
             if tmp > list[i + 1]:
