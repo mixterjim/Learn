@@ -47,11 +47,14 @@ def MERGE(list, p, q, r):
 
 
 def MERGE_SORT(list, p, r):
-    global INVERSION
     if p < r - 1:
         q = int((r - p) / 2 + p)
+        MERGE_SORT(list, p, q)
+        MERGE_SORT(list, q, r)
+        MERGE(list, p, q, r)
     return INVERSION
 
+A = random_int_list(1, 10000, 100)
 B = A[:]
 start = time.clock()
 print(MERGE_SORT(B, 0, len(B)))
