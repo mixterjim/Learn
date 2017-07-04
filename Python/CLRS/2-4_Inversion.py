@@ -1,6 +1,6 @@
 import random
 import time
-import copy
+INVERSION = 0
 
 
 def random_int_list(start, stop, length):
@@ -24,34 +24,33 @@ def INVERSION_NUM(list):
 
 def MERGE(list, p, q, r):
     global INVERSION
-    NaN = float('Inf')
     L = list[p:q]
     R = list[q:r]
-    L.append(NaN)
-    R.append(NaN)
     i = j = 0
-    for k in range(p, r):
+    while i < len(L) and j < len(R):
         if L[i] <= R[j]:
-            list[k] = L[i]
-            i = i + 1
+            list[p] = L[i]
+            i += 1
         else:
-            list[k] = R[j]
-            j = j + 1
-            INVERSION += q - p - i
-    return INVERSION
+            list[p] = R[j]
+            INVERSION += q + j - p
+            j += 1
+        p += 1
+    if i > j:
+        for j in range(j, len(R)):
+            list[p] = R[j]
+            p += 1
+    else:
+        for i in range(i, len(L)):
+            list[p] = L[i]
+            p += 1
 
 
 def MERGE_SORT(list, p, r):
     global INVERSION
-    INVERSION = 0
     if p < r - 1:
         q = int((r - p) / 2 + p)
-        INVERSION += MERGE_SORT(list, p, q)
-        INVERSION += MERGE_SORT(list, q, r)
-        INVERSION += MERGE(list, p, q, r)
     return INVERSION
-
-A = random_int_list(1, 100000, 10)
 
 B = A[:]
 start = time.clock()
