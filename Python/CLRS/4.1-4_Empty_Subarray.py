@@ -1,3 +1,21 @@
+def EXHAUSTION_FIND_MAXIMUM_SUBARRAY(list):
+    max = 0
+    left = 0
+    right = 0
+    for i in range(0, len(list)):
+        sum = list[i]
+        for j in range(i, len(list)):
+            if i == j:
+                sum = list[j]
+            else:
+                sum += list[j]
+            if sum > max:
+                max = sum
+                left = i
+                right = j
+    return left, right, max
+
+
 def FIND_MAX_CROSSING_SUBARRAY(list, low, mid, high):
     left_sum = -float('Inf')
     sum = 0
@@ -20,6 +38,8 @@ def FIND_MAX_CROSSING_SUBARRAY(list, low, mid, high):
 def FIND_MAXIMUM_SUBARRAY(list, low, high):
     if high == low:
         return low, high, list[low]
+    elif len(list) < 50:
+        return EXHAUSTION_FIND_MAXIMUM_SUBARRAY(list)
     else:
         mid = int((low + high) / 2)
         left_low, left_high, left_sum = FIND_MAXIMUM_SUBARRAY(list, low, mid)
@@ -32,6 +52,6 @@ def FIND_MAXIMUM_SUBARRAY(list, low, high):
         else:
             return cross_low, cross_high, cross_sum
 
-A = [13, -3, -25, 20, -30, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
-A = [-13, -3, -25, -20, -30, -16, -23, -18, -20, -7, -12, -5, -22, -15, -4, -7]
+A = []
+
 print(FIND_MAXIMUM_SUBARRAY(A, 0, len(A) - 1))
