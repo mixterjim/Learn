@@ -9,7 +9,7 @@ def FIND_MAX_CROSSING_SUBARRAY(list, low, mid, high):
     right_sum = -float('Inf')
     sum = 0
     max_right = mid
-    for j in range(mid + 1, high):
+    for j in range(mid + 1, high + 1):
         sum = sum + list[j]
         if sum > right_sum:
             right_sum = sum
@@ -19,7 +19,7 @@ def FIND_MAX_CROSSING_SUBARRAY(list, low, mid, high):
 
 def FIND_MAXIMUM_SUBARRAY(list, low, high):
     if high == low:
-        return low, high, list[low - 1]
+        return low, high, list[low]
     else:
         mid = int((low + high) / 2)
         left_low, left_high, left_sum = FIND_MAXIMUM_SUBARRAY(list, low, mid)
@@ -32,6 +32,6 @@ def FIND_MAXIMUM_SUBARRAY(list, low, high):
         else:
             return cross_low, cross_high, cross_sum
 
-# A = [13, -3, -25, 20, -30, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
-A = [100,5,-10,4]
-print(FIND_MAXIMUM_SUBARRAY(A, 0, len(A)))
+A = [13, -3, -25, 20, -30, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
+
+print(FIND_MAXIMUM_SUBARRAY(A, 0, len(A)-1))
