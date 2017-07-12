@@ -65,12 +65,25 @@ def FIND_MAXIMUM_SUBARRAY(list, low, high):
             return cross_low, cross_high, cross_sum
 
 
-A = random_int_list(-100000, 100000, 100)
+def FIND_MAXIMUM_SUBARRAY_HYBRID(list, low, high):
+    if high == low:
+        return low, high, list[low]
+    elif len(list) < 50:
+        return EXHAUSTION_FIND_MAXIMUM_SUBARRAY(list)
+    else:
+        mid = int((low + high) / 2)
+        left_low, left_high, left_sum = FIND_MAXIMUM_SUBARRAY(list, low, mid)
+        right_low, right_high, right_sum = FIND_MAXIMUM_SUBARRAY(list, mid + 1, high)
+        cross_low, cross_high, cross_sum = FIND_MAX_CROSSING_SUBARRAY(list, low, mid, high)
+        if left_sum >= right_sum and left_sum >= cross_sum:
+            return left_low, left_high, left_sum
+        elif right_sum >= left_sum and right_sum >= cross_sum:
+            return right_low, right_high, right_sum
+        else:
+            return cross_low, cross_high, cross_sum
 
-start = time.clock()
-print(FIND_MAXIMUM_SUBARRAY(A, 0, len(A)-1))
-end = time.clock()
-print("FIND_MAXIMUM_SUBARRAY: %f s" % (end - start))
+
+A = random_int_list(-100000, 100000, 1000)
 
 start = time.clock()
 print(EXHAUSTION_FIND_MAXIMUM_SUBARRAY(A))
@@ -78,9 +91,11 @@ end = time.clock()
 print("EXHAUSTION_FIND_MAXIMUM_SUBARRAY: %f s" % (end - start))
 
 start = time.clock()
-if len(A) < 50:
-    print(EXHAUSTION_FIND_MAXIMUM_SUBARRAY(A))
-else:
-    print(FIND_MAXIMUM_SUBARRAY(A, 0, len(A)-1))
+print(FIND_MAXIMUM_SUBARRAY(A, 0, len(A)-1))
 end = time.clock()
-print("HYBRID_ALGORITHM: %f s" % (end - start))
+print("FIND_MAXIMUM_SUBARRAY: %f s" % (end - start))
+
+start = time.clock()
+print(FIND_MAXIMUM_SUBARRAY_HYBRID(A, 0, len(A)-1))
+end = time.clock()
+print("FIND_MAXIMUM_SUBARRAY_HYBRID: %f s" % (end - start))
