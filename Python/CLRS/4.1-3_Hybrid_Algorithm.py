@@ -65,22 +65,12 @@ def FIND_MAXIMUM_SUBARRAY(list, low, high):
             return cross_low, cross_high, cross_sum
 
 
-def RUNNING_TIME(name, fun):
-    start = time.clock()
-    print(fun)
-    end = time.clock()
-    print(name+": %f s" % (end - start))
-
 A = random_int_list(-100000, 100000, 100)
-
-RUNNING_TIME("FIND_MAXIMUM_SUBARRAY", FIND_MAXIMUM_SUBARRAY(A, 0, len(A)-1))
 
 start = time.clock()
 print(FIND_MAXIMUM_SUBARRAY(A, 0, len(A)-1))
 end = time.clock()
 print("FIND_MAXIMUM_SUBARRAY: %f s" % (end - start))
-
-RUNNING_TIME("EXHAUSTION_FIND_MAXIMUM_SUBARRAY", EXHAUSTION_FIND_MAXIMUM_SUBARRAY(A))
 
 start = time.clock()
 print(EXHAUSTION_FIND_MAXIMUM_SUBARRAY(A))
