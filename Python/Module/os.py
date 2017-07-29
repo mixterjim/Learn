@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import os
 import time
 
@@ -14,15 +16,19 @@ path = os.getcwd()
 while True:
     order = input('root@python:~' + path + '#')
     if order == 'ls':
-        file = os.listdir(path)  # File list
-        for i in range(len(file)):
-            statinfo = os.stat(file[i])  # File creation time
-            if os.path.isdir(file[i]):
+        filename = os.listdir(path)  # File name list
+        for i in range(len(filename)):
+            file = path + '\\' + filename[i]
+            statinfo = os.stat(file)  # File creation time
+            if os.path.isdir(file):
                 properties = '<DIR>'
+                size = '\t'
             else:
-                properties = '\t'
-            data = '%d-%d-%d\t%d:%d' % time.localtime(statinfo.st_mtime)[0:5]
-            print(data + "\t" + properties + "\t" + file[i],)
+                properties = ''
+                size = str(os.path.getsize(file)) + '\t'
+            data = '%04d-%02d-%02d\t%02d:%02d\t' % time.localtime(statinfo.st_mtime)[0:5]
+            print('%s%5s%10s%-10s' % (data, properties, size, filename[i]))
+        print(os.stat(path))
     if order == 'cd ..':
         path = os.path.dirname(path)
     elif order[0:3] == 'cd ':
