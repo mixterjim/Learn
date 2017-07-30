@@ -1,3 +1,7 @@
+global c
+c = 0
+
+
 class STRASSEN:
 
     def __init__(self, A, B):
@@ -19,19 +23,20 @@ class STRASSEN:
                 del(C[m][n:])
         except:
             pass
-        for i in range(len(C)):
-            print(C[i])
+        # for i in range(len(C)):
+        #     print(C[i])
 
     def Strassen(self, A, B):
+        global c
         n = len(A)
-        tmp_n = 0
         C = [[0] * n for i in range(n)]
+        tmp_n = 0
         for i in range(n):
             if A[i].count(0) == len(A):
                 tmp_n += 1
         if tmp_n == n:
             return C
-        if n == 2:
+        elif n == 2:
             S1 = B[0][1] - B[1][1]
             S2 = A[0][0] + A[0][1]
             S3 = A[1][0] + A[1][1]
@@ -53,6 +58,7 @@ class STRASSEN:
             C[0][1] = P1 + P2
             C[1][0] = P3 + P4
             C[1][1] = P5 + P1 - P3 - P7
+            c += 7
             return C
         else:
             A1 = []
@@ -108,7 +114,10 @@ class STRASSEN:
                 C[i][j] = A[i][j] - B[i][j]
         return C
 
-A = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
-B = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
-
+# A = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
+# B = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
+n = 68
+A = [[1] * n for i in range(n)]
+B = [[1] * n for i in range(n)]
 STRASSEN(A, B)
+print(c)
