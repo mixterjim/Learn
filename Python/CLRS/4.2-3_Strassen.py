@@ -1,7 +1,27 @@
+import math
+
+
 class STRASSEN:
 
     def __init__(self, A, B):
+        n = len(A)
+        if bin(n).count('1') > 1:
+            k = 2**(int(math.sqrt(n)) + 1)
+            l = [0] * k
+            for i in range(k - n):
+                A.append(l)
+                B.append(l)
+            for i in range(n):
+                for j in range(k - n):
+                    A[i].append(0)
+                    B[i].append(0)
         C = self.Strassen(A, B)
+        try:
+            del(C[n:k])
+            for m in range(n):
+                del(C[m][n:])
+        except:
+            pass
         for i in range(0, len(C)):
             print(C[i])
 
@@ -85,8 +105,7 @@ class STRASSEN:
                 C[i][j] = A[i][j] - B[i][j]
         return C
 
-A = [[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]]
-B = [[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]]
-
+A = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
+B = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
 
 STRASSEN(A, B)
