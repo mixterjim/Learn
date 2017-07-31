@@ -34,6 +34,8 @@ class STRASSEN:
         for i in range(n):
             if A[i].count(0) == len(A):
                 tmp_n += 1
+            else:
+                break
         if tmp_n == n:
             return C
         elif n == 2:
