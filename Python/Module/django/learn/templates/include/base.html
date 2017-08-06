@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <h1>My Django Site</h1>
+    {% block content %}{% endblock %}
+    <hr>
+    {% block footer %}
+    <p>Thanks for visiting it.</p>
+    {% endblock %}
+</body>
+</html>

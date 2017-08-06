@@ -1,0 +1,15 @@
+{% extends "include/base.html" %}
+
+{% block title %}
+    Future time
+{% endblock %}
+
+{% block content %}
+    <p>After {{ hour_offset }} hour(s), it will be {{ next_time }}.</p>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    {# Get the block from base.html #}
+    {% include 'include/footer.html' %}
+{% endblock %}
