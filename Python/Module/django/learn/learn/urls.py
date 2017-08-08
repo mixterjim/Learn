@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from learn.views import *
+from books.views import search
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,4 +24,5 @@ urlpatterns = [
     url(r'^time/$', current_datetime),
     url(r'^time/plus/(\d{1,2})/$', hours_ahead),  # hours_ahead2
     url(r'^meta/(?P<key>[\w.]*)$', display_meta,),  # return argument in (?P<name>pattern)
+    url(r'^books/search/$', search)
 ]

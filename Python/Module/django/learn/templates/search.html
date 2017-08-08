@@ -1,0 +1,39 @@
+{% extends "include/base.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block content %}
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form action="" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+    {% if query %}
+        <p>You searched for: <strong>{{ query }}</strong></p>
+        {% if books %}
+            <p>Found {{ books|length }} book{{ books|pluralize }}.</p>
+            {# "pluralize":if the books not only one, return "s" #}
+            <ul>
+                {% for book in books %}
+                <li>{{ book.title }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No books matched your search criteria.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    {# Get the block from base.html #}
+    {% include 'include/footer.html' %}
+{% endblock %}
