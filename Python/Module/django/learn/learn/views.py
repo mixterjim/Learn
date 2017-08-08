@@ -37,3 +37,13 @@ def hours_ahead2(request, hour_offset):
     next_time = datetime.now() + timedelta(hours=hour_offset)
     return render_to_response('hours_ahead.html', locals())  # locals() return all variable
     # No get_template, Template, HttpResponse, Context
+
+
+def display_meta(request, key):
+    try:
+        value = request.META[str(key)]
+    except KeyError:
+        values = list(request.META.items())
+        values.sort()
+        return render_to_response('display_meta.html', {'values': values})
+    return render_to_response('display_meta.html', locals())
