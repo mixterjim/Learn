@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^time/$', current_datetime),
     url(r'^time/plus/(\d{1,2})/$', hours_ahead),  # hours_ahead2
     url(r'^meta/(?P<key>[\w.]*)$', display_meta,),  # return argument in (?P<name>pattern)
-    url(r'^books/search/$', search)
+    url(r'^books/search/$', search),
+    url(r'^contact/$', contact),
+    url(r'^contact_form/$', contact_form),
 ]

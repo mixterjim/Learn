@@ -1,0 +1,54 @@
+{% extends "include/base.html" %}
+
+{% block title %}
+    Contact us
+{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+    <div class="field{% if form.message.errors %} errors{% endif %}">
+        {% if form.message.errors %}
+            <ul>
+            {% for error in form.message.errors %}
+                <li><strong>{{ error }}</strong></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+<!--             <div class="field">
+                {{ form.subject.errors }}
+                    <label for="id_subject">Subject:</label>
+                {{ form.subject }}
+            </div> -->
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    {# Get the block from base.html #}
+    {% include 'include/footer.html' %}
+    <style type="text/css">
+        ul.errorlist {
+            margin: 0;
+            padding: 0;
+        }
+        .errorlist li {
+            background-color: red;
+            color: white;
+            display: block;
+            font-size: 10px;
+            margin: 0 0 3px;
+            padding: 4px 5px;
+        }
+    </style>
+{% endblock %}

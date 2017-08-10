@@ -1,8 +1,11 @@
-from django.http import HttpResponse, Http404
-from django.shortcuts import render_to_response
+from django.core.mail import send_mail
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.shortcuts import render, render_to_response
 from django.template import Template, Context
 from django.template.loader import get_template
 from datetime import datetime, timedelta
+from django.template import RequestContext
+from learn.forms import ContactForm
 
 
 def index(request):
@@ -47,3 +50,50 @@ def display_meta(request, key):
         values.sort()
         return render_to_response('display_meta.html', {'values': values})
     return render_to_response('display_meta.html', locals())
+
+
+def contact(request):
+    errors = []
+    if request.method == 'POST':
+        if not request.POST.get('subject', ''):
+            errors.append('Enter a subject.')
+        if not request.POST.get('message', ''):
+            errors.append('Enter a message.')
+        if request.POST.get('email') and '@' not in request.POST['email']:
+            errors.append('Enter a valid e-mail address.')
+        if not errors:
+            send_mail(
+                'Subject here',
+                'Here is the message.',
+                'from@example.com',
+                ['to@example.com'],
+                fail_silently=True
+            )
+            # https://docs.djangoproject.com/en/1.11/topics/email/
+            return HttpResponseRedirect('/')
+    return render(request, 'contact.html', {
+        'errors': errors,
+        'subject': request.POST.get('subject', ''),
+        'email': request.POST.get('email', ''),
+        'message': request.POST.get('message', ''),
+    })
+    # csrf need use render
+
+
+def contact_form(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            send_mail(
+                cd['subject'],
+                cd['message'],
+                cd.get('email', 'noreply@example.com'),
+                ['siteowner@example.com'],
+            )
+            return HttpResponseRedirect('/')
+    else:
+        form = ContactForm(
+            initial={'subject': 'Untitled'}
+        )
+    return render(request, 'contact_form.html', {'form': form})

@@ -1,7 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from books.models import Book
-from django.template import Context
 
 
 def search(request):
