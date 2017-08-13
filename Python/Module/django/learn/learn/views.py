@@ -9,7 +9,10 @@ from learn.forms import ContactForm
 
 
 def index(request):
-    html = "<html><body>Hello,World!</body></html>"
+    name = 'World'
+    if not request.user.is_authenticated():
+        name = request.user
+    html = "<html><body>Hello,%s!</body></html>" % name
     return HttpResponse(html)
 
 
@@ -90,6 +93,7 @@ def contact_form(request):
                 cd['message'],
                 cd.get('email', 'noreply@example.com'),
                 ['siteowner@example.com'],
+                fail_silently=True
             )
             return HttpResponseRedirect('/')
     else:

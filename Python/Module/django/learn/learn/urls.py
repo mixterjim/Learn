@@ -13,18 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import url, include
 from django.contrib import admin
 from learn.views import *
-from books.views import search
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^time/$', current_datetime),
     url(r'^time/plus/(\d{1,2})/$', hours_ahead),  # hours_ahead2
+    url(r'^meta/cookie$', display_meta, {'key': 'HTTP_COOKIE'}),
     url(r'^meta/(?P<key>[\w.]*)$', display_meta,),  # return argument in (?P<name>pattern)
-    url(r'^books/search/$', search),
+    url(r'^books/', include('books.urls')),
     url(r'^contact/$', contact),
     url(r'^contact_form/$', contact_form),
 ]
+if settings.DEBUG:
+    urlpatterns += (
+        # (r'^debuginfo/$', debug),
+    )
