@@ -1,0 +1,20 @@
+{% extends "include/base.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    {% autoescape off %}
+        <p>Hello,{{ user|safe }}!</p>
+        <p>IP:{{ ip_address }}</p>
+    {% endautoescape %}
+    {# Not escaped characters("safe" or "autoescape") #}
+    <p>{{ message|default:"This is a string literal." }}</p>
+    {# filter no escaped characters #}
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    {# Get the block from base.html #}
+    {% include 'include/footer.html' %}
+{% endblock %}

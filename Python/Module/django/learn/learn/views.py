@@ -1,18 +1,23 @@
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, render_to_response
-from django.template import Template, Context
+from django.template import Template, Context, RequestContext
 from django.template.loader import get_template
 from datetime import datetime, timedelta
-from django.template import RequestContext
 from learn.forms import ContactForm
 
 
+def custom_proc(request):
+    "A context processor that provides 'user' and 'ip_address'."
+    return {
+        'user': request.user,
+        'ip_address': request.META['REMOTE_ADDR'],
+    }
+
+
 def index(request):
-    name = 'World'
-    if not request.user.is_authenticated():
-        name = request.user
-    html = "<html><body>Hello,%s!</body></html>" % name
+    t = get_template('index.html')
+    html = t.render(custom_proc(request))
     return HttpResponse(html)
 
 

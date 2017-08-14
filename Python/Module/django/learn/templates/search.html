@@ -1,5 +1,6 @@
 {% extends "include/base.html" %}
-
+{% load poll_extras %}
+{# from books\templatetags #}
 {% block title %}
     Search
 {% endblock %}
@@ -23,13 +24,14 @@
             {# "pluralize":if the books not only one, return "s" #}
             <ul>
                 {% for book in books %}
-                <li>{{ book.title }}</li>
+                <li>{{ book.title|cut:" " }}</li>
                 {% endfor %}
             </ul>
         {% else %}
             <p>No books matched your search criteria.</p>
         {% endif %}
     {% endif %}
+    {{ current_time }}
 {% endblock %}
 
 {% block footer %}
