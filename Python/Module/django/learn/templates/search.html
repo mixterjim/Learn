@@ -24,18 +24,19 @@
             {# "pluralize":if the books not only one, return "s" #}
             <ul>
                 {% for book in books %}
+                {% upper %}
                 <li>{{ book.title|cut:" " }}</li>
+                {% endupper %}
                 {% endfor %}
             </ul>
         {% else %}
             <p>No books matched your search criteria.</p>
         {% endif %}
     {% endif %}
-    {{ current_time }}
 {% endblock %}
 
 {% block footer %}
-    {{ block.super }}
-    {# Get the block from base.html #}
+    {% current_time "%Y-%M-%d %I:%M %p" as my_current_time %}
+    {{ my_current_time }}
     {% include 'include/footer.html' %}
 {% endblock %}
