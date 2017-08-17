@@ -1,7 +1,7 @@
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, render_to_response
-from django.template import Template, Context, RequestContext
+from django.template import Template, TemplateDoesNotExist, Context, RequestContext
 from django.template.loader import get_template
 from datetime import datetime, timedelta
 from learn.forms import ContactForm
@@ -106,3 +106,10 @@ def contact_form(request):
             initial={'subject': 'Untitled'}
         )
     return render(request, 'contact_form.html', {'form': form})
+
+
+def about_pages(request, page):
+    try:
+        return render(request, "about/%s.html" % page)
+    except TemplateDoesNotExist:
+        raise Http404()

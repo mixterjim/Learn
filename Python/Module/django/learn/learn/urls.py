@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from learn.views import *
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^books/', include('books.urls')),
     url(r'^contact/$', contact),
     url(r'^contact_form/$', contact_form),
+    url(r'^about/$', TemplateView.as_view(template_name="about.html")),
+    url(r'^about/(\w+)/$', about_pages),
 ]
 if settings.DEBUG:
     urlpatterns += (
