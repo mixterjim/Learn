@@ -1,6 +1,13 @@
 from django.db import models
 
 
+class BookManager(models.Manager):
+    '''Book.objects.title_count('keyword')'''
+
+    def title_count(self, keyword):
+        return self.filter(title__icontains=keyword).count()
+
+
 class Publisher(models.Model):
     name = models.CharField(max_length=30)
     address = models.CharField(max_length=50)
@@ -31,6 +38,7 @@ class Book(models.Model):
     authors = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher)
     publication_date = models.DateField(blank=True, null=True)  # null=True maybe useless
+    objects = BookManager()
 
     def __str__(self):
         return self.title
