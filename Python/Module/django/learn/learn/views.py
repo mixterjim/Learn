@@ -1,3 +1,5 @@
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, render_to_response
@@ -113,3 +115,69 @@ def about_pages(request, page):
         return render(request, "about/%s.html" % page)
     except TemplateDoesNotExist:
         raise Http404()
+
+
+def cookie(request):
+    s = {}
+    if "favorite_color" in request.GET or "favorite_color" in request.COOKIES:
+        if "favorite_color" in request.GET:
+            request.COOKIES["favorite_color"] = request.GET["favorite_color"]
+            # color = request.GET["favorite_color"]
+            # response = HttpResponse("Your favorite color is now %s" % color)
+            # response.set_cookie("favorite_color", request.GET["favorite_color"])
+            # return response
+        color = request.COOKIES["favorite_color"]
+        s = {'message': "Your favorite color is " + color + '.'}
+    return render_to_response('favorite_color.html', s)
+
+
+def session(request):
+    s = {}
+    if "favorite_color" in request.GET or "favorite_color" in request.session:
+        if "favorite_color" in request.GET:
+            request.session["favorite_color"] = request.GET["favorite_color"]
+        color = request.session["favorite_color"]
+        s = {'message': "Your favorite color is " + color + '.'}
+    return render_to_response('favorite_color.html', s)
+
+
+def user_logout(request):
+    auth.logout(request)
+    # Redirect to a success page.
+    return HttpResponse("account loggedout")
+
+
+def login_result(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        # Correct password, and the user is marked "active"
+        auth.login(request, user)
+        # Redirect to a success page.
+        return HttpResponse("account loggedin")
+    else:
+        # Show an error page
+        return HttpResponse("account invalid")
+
+
+# @login_required
+def accounts(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/accounts/login/?next=%s' % request.path)
+        # or use @login_required
+    else:
+        return HttpResponse("Hello " + request.user.username)
+
+
+def vote(request):
+    if request.user.is_authenticated() and request.user.has_perm('polls.can_vote')):
+        # vote here
+    else:
+        return HttpResponse("You can't vote in this poll.")
+def user_can_vote(user):
+    return user.is_authenticated() and user.has_perm("polls.can_vote")
+
+@user_passes_test(user_can_vote, login_url = "/login/")
+def vote(request):
+    # Code here can assume a logged-in user with the correct permission.

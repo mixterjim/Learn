@@ -1,0 +1,15 @@
+{% extends "include/base.html" %}
+
+{% block title %}
+Favorite Color
+{% endblock %}
+
+{% block content %}
+<p>{{ message|default:"You don't have a favorite color." }}</p>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    {# Get the block from base.html #}
+    {% include 'include/footer.html' %}
+{% endblock %}

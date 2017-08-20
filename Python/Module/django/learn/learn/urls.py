@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.views import login, logout
 from learn.views import *
 from django.views.generic import TemplateView
 
@@ -31,6 +32,12 @@ urlpatterns = [
     url(r'^contact_form/$', contact_form),
     url(r'^about/$', TemplateView.as_view(template_name="about.html")),
     url(r'^about/(\w+)/$', about_pages),
+    url(r'^cookie/$', cookie),
+    url(r'^session/$', session),
+    url(r'^accounts/$', accounts),
+    url(r'^accounts/login/$', login),  # user_login
+    url(r'^accounts/logout/$', logout),  # user_logout
+    url(r'^accounts/result/$', login_result),
 ]
 if settings.DEBUG:
     urlpatterns += (
