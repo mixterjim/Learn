@@ -1,5 +1,5 @@
 from django.contrib import auth
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, render_to_response
@@ -167,17 +167,16 @@ def accounts(request):
         return HttpResponseRedirect('/accounts/login/?next=%s' % request.path)
         # or use @login_required
     else:
-        return HttpResponse("Hello " + request.user.username)
+        return vote(request)
 
 
 def vote(request):
-    if request.user.is_authenticated() and request.user.has_perm('polls.can_vote')):
-        # vote here
+    if request.user.has_perm('polls.can_vote'):
+        return HttpResponse("You can vote.")
     else:
         return HttpResponse("You can't vote in this poll.")
-def user_can_vote(user):
-    return user.is_authenticated() and user.has_perm("polls.can_vote")
 
-@user_passes_test(user_can_vote, login_url = "/login/")
-def vote(request):
-    # Code here can assume a logged-in user with the correct permission.
+
+@permission_required('polls.can_vote', login_url="/accounts/login/")
+def voted(request):
+    return HttpResponse("You can vote.")

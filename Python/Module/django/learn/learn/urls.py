@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^accounts/login/$', login),  # user_login
     url(r'^accounts/logout/$', logout),  # user_logout
     url(r'^accounts/result/$', login_result),
+    url(r'^accounts/vote/$', voted),
 ]
 if settings.DEBUG:
     urlpatterns += (
