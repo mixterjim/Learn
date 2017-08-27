@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class A31_Cycle {
+public class A31_While {
 
     public static void main(String[] args) {
         // Double in Java
