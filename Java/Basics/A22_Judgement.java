@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class A22_Judgement {
 
     public static void main(String[] args) {
-        // Double in Java
         Scanner in = new Scanner(System.in);
         System.out.println("Give me 10$");
         int amount = in.nextInt();
