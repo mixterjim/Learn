@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class A43_Boolean {
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
         boolean yes = true;
         boolean no = false;
         System.out.println(!yes);           //false
