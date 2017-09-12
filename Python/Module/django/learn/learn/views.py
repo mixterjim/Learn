@@ -7,14 +7,8 @@ from django.template import Template, TemplateDoesNotExist, Context, RequestCont
 from django.template.loader import get_template
 from datetime import datetime, timedelta
 from learn.forms import ContactForm
-
-
-def custom_proc(request):
-    "A context processor that provides 'user' and 'ip_address'."
-    return {
-        'user': request.user,
-        'ip_address': request.META['REMOTE_ADDR'],
-    }
+import learn.urls
+from re import findall
 
 
 def index(request):
@@ -23,9 +17,33 @@ def index(request):
     return HttpResponse(html)
 
 
+def custom_proc(request):
+    "A context processor that provides 'user' and 'ip_address'."
+    urls = set(findall(r'(?<=\^).*?(?=\/|\$)', str(learn.urls.urlpatterns)))
+    urls.discard('')
+    urls = list(urls)
+    urls.sort()
+    return {
+        'username': request.user,
+        'ip_address': request.META['REMOTE_ADDR'],
+        'urls': urls,
+    }
+
+
 def current_datetime(request):
     now = datetime.now()
-    t = Template("<html><body>It is {{ current_date }} now.</body></html>")
+    t = Template('''<html><body>
+        It is {{ current_date }} now.</br>
+        What's time after
+        <input type="text" value="8" id="link" style="width:20px" />
+        hours?
+        <input type="button" value="Go" onclick="jump()" />
+        <script>
+            function jump(){
+                location.href = "plus/"+document.getElementById("link").value;
+            }
+        </script>
+        </body></html>''')
     html = t.render(Context({'current_date': str(now)}))
     return HttpResponse(html)
 

@@ -6,6 +6,11 @@ Favorite Color
 
 {% block content %}
 <p>{{ message|default:"You don't have a favorite color." }}</p>
+What's you favorite color?
+<form action="" method="get">
+    <input type="text" name="favorite_color">
+    <input type="submit" value="Submit">
+</form>
 {% endblock %}
 
 {% block footer %}

@@ -5,12 +5,15 @@
 
 {% block content %}
     {% autoescape off %}
-        <p>Hello,{{ user|safe }}!</p>
+        <p>Hello,{{ username|safe }}!</p>
         <p>IP:{{ ip_address }}</p>
     {% endautoescape %}
     {# Not escaped characters("safe" or "autoescape") #}
     <p>{{ message|default:"This is a string literal." }}</p>
     {# filter no escaped characters #}
+    {% for url in urls %}
+        <li><a href="{{ url }}">{{ url }}</a></li>
+    {% endfor %}
 {% endblock %}
 
 {% block footer %}
