@@ -5,7 +5,12 @@
 
 {% block content %}
     {% autoescape off %}
-        <p>Hello,{{ username|safe }}!</p>
+        {% if username == 0 %}
+        <p>Hello,Anonymous!&nbsp&nbsp<a href="accounts/login">Login</a></p>
+        {% endif %}
+        {% if username != 0 %}
+        <p>Hello,{{ username|safe }}!&nbsp&nbsp<a href="accounts/logout">Logout</a></p>
+        {% endif %}
         <p>IP:{{ ip_address }}</p>
     {% endautoescape %}
     {# Not escaped characters("safe" or "autoescape") #}

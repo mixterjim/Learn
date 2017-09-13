@@ -23,8 +23,12 @@ def custom_proc(request):
     urls.discard('')
     urls = list(urls)
     urls.sort()
+    if 'AnonymousUser' in str(request.user):
+        username = 0
+    else:
+        username = request.user
     return {
-        'username': request.user,
+        'username': username,
         'ip_address': request.META['REMOTE_ADDR'],
         'urls': urls,
     }

@@ -2,9 +2,18 @@
 
 {% block content %}
     <h2>Publishers</h2>
+    <form action="search" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
     <ul>
         {% for publisher in object_list %}
             <li><a href="{{ publisher.name }}">{{ publisher.name }}</a></li>
         {% endfor %}
+    </ul>
+    <ul>
+    <b>Download list</b>
+        <li><a href="down/csv">csv</a></li>
+        <li><a href="down/pdf">pdf</a></li>
     </ul>
 {% endblock %}

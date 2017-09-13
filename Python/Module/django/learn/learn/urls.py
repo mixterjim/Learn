@@ -19,6 +19,12 @@ from django.contrib import admin
 from django.contrib.auth.views import login, logout
 from learn.views import *
 from django.views.generic import TemplateView
+import os
+
+authors = os.listdir('./templates/about')
+for i in range(len(authors)):
+    authors[i] = authors[i][0:-5]
+about = {'authors': authors}
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,7 +36,7 @@ urlpatterns = [
     url(r'^books/', include('books.urls')),
     url(r'^contact/$', contact),
     url(r'^contact_form/$', contact_form),
-    url(r'^about/$', TemplateView.as_view(template_name="about.html")),
+    url(r'^about/$', TemplateView.as_view(template_name="about.html"), about),
     url(r'^about/(\w+)/$', about_pages),
     url(r'^cookie/$', cookie),
     url(r'^session/$', session),

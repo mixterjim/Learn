@@ -11,6 +11,9 @@
     {# Not escaped characters("safe" or "autoescape") #}
     <p>{{ message|default:"This is a string literal." }}</p>
     {# filter no escaped characters #}
+    {% for author in authors %}
+        <a href="{{ author }}">{{ author }}</a>&nbsp&nbsp|&nbsp&nbsp
+    {% endfor %}
 {% endblock %}
 
 {% block footer %}
