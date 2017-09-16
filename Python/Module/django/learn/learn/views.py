@@ -1,5 +1,6 @@
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, render_to_response
@@ -184,6 +185,7 @@ def login_result(request):
 
 
 # @login_required
+# @permission_required('polls.can_vote', login_url="/accounts/login/")
 def accounts(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/accounts/login/?next=%s' % request.path)
@@ -199,6 +201,14 @@ def vote(request):
         return HttpResponse("You can't vote in this poll.")
 
 
-@permission_required('polls.can_vote', login_url="/accounts/login/")
-def voted(request):
-    return HttpResponse("You can vote.")
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return HttpResponseRedirect("/accounts/vote")
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/register.html", {
+        'form': form,
+    })

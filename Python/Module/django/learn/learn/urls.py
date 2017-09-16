@@ -41,10 +41,11 @@ urlpatterns = [
     url(r'^cookie/$', cookie),
     url(r'^session/$', session),
     url(r'^accounts/$', accounts),
+    url(r'^accounts/register/$', register),
     url(r'^accounts/login/$', login),  # user_login
     url(r'^accounts/logout/$', logout),  # user_logout
     url(r'^accounts/result/$', login_result),
-    url(r'^accounts/vote/$', voted),
+    url(r'^accounts/profile/$', TemplateView.as_view(template_name="profile.html"))
 ]
 if settings.DEBUG:
     urlpatterns += (

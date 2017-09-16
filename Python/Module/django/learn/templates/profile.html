@@ -1,0 +1,11 @@
+{% extends "include/base.html" %}
+{% block content %}
+    {% if perms.polls %}
+      <p>You have permission to do something in the polls app.</p>
+      {% if perms.polls.can_vote %}
+        <p>You can vote!</p>
+      {% endif %}
+    {% else %}
+      <p>You don't have permission to do anything in the polls app.</p>
+    {% endif %}
+{% endblock %}
