@@ -1,3 +1,7 @@
+A = [[1, 3], [7, 5]]
+B = [[6, 8], [4, 2]]
+
+
 def SQUARE_MATRIX_MULTIPLY(A, B):
     n = len(A)
     C = [[0] * n for x in range(n)]
@@ -24,10 +28,14 @@ def SQUARE_MATRIX_MULTIPLY_RECURSIVE(A, B):
         C[1][1] = A[1][0] * B[0][1] + A[1][1] * B[1][1]
     return C
 
+A = [[1, 2, 3, 4], [2, 2, 3, 4], [3, 2, 3, 4], [4, 2, 3, 4]]
+
 
 def STRASSEN(A, B):
     n = len(A)
-    C = [[0] * n for i in range(n)]
+    if n > 2:
+        n = int(n / 2)
+        STRASSEN(A[0:n], B[0:n])
     S1 = B[0][1] - B[1][1]
     S2 = A[0][0] + A[0][1]
     S3 = A[1][0] + A[1][1]
@@ -45,15 +53,13 @@ def STRASSEN(A, B):
     P5 = S5 * S6
     P6 = S7 * S8
     P7 = S9 * S10
+    n = len(A)
+    C = [[0] * n for x in range(n)]
     C[0][0] = P5 + P4 - P2 + P6
     C[0][1] = P1 + P2
     C[1][0] = P3 + P4
     C[1][1] = P5 + P1 - P3 - P7
     return C
-
-A = [[1, 3], [7, 5]]
-B = [[6, 8], [4, 2]]
-
 
 print(SQUARE_MATRIX_MULTIPLY(A, B))
 print(SQUARE_MATRIX_MULTIPLY_RECURSIVE(A, B))
